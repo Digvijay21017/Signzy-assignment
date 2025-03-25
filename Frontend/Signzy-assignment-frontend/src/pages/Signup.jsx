@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
@@ -16,7 +17,7 @@ const Signup = () => {
     setError("");
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/signup", formData);
+      const { data } = await axios.post(`${API_BASE_URL}/api/auth/signup`, formData);
       alert("Signup successful! Please log in.");
       navigate("/login");
     } catch (err) {

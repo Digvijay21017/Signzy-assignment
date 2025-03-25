@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,21 +18,21 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const friendsRes = await axios.get(
-          `http://localhost:5000/api/friends/getFriends`,
+          `${API_BASE_URL}/api/friends/getFriends`,
           {
             headers: { Authorization: token },
           }
         );
 
         const requestsRes = await axios.get(
-          `http://localhost:5000/api/friends/requests/`,
+          `${API_BASE_URL}/api/friends/requests/`,
           {
             headers: { Authorization: token },
           }
         );
 
         const suggestionsRes = await axios.get(
-          `http://localhost:5000/api/friends/suggestions`,
+          `${API_BASE_URL}/api/friends/suggestions`,
           {
             headers: { Authorization: token },
           }
@@ -53,7 +54,7 @@ const Home = () => {
       // console.log(friendId);
 
       await axios.put(
-        "http://localhost:5000/api/friends/accept",
+        `${API_BASE_URL}/api/friends/accept`,
         { friendId },
         { headers: { Authorization: token } }
       );
@@ -74,7 +75,7 @@ const Home = () => {
   const rejectFriendRequest = async (friendId) => {
     try {
       await axios.put(
-        "http://localhost:5000/api/friends/reject",
+        `${API_BASE_URL}/api/friends/reject`,
         { friendId },
         { headers: { Authorization: token } }
       );
@@ -88,7 +89,7 @@ const Home = () => {
     if (!search) return;
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/users/search?query=${search}`,
+        `${API_BASE_URL}/api/users/search?query=${search}`,
         {
           headers: { Authorization: token },
         }
@@ -103,7 +104,7 @@ const Home = () => {
   const sendFriendRequest = async (friendId) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/friends/request",
+        `${API_BASE_URL}/api/friends/request`,
         { friendId },
         { headers: { Authorization: token } }
       );
@@ -125,7 +126,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-100">
       {/* 🏠 Navbar */}
       <nav className="bg-blue-500 p-4 flex justify-between items-center text-white">
-        <h1 className="text-2xl font-bold">Friend Finder</h1>
+        <h1 className="text-2xl font-bold">Signzy Friends</h1>
         <div>
           <button
             onClick={handleLogout}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -16,7 +17,7 @@ const Login = () => {
     setError("");
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/auth/login", formData);
+      const { data } = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
       localStorage.setItem("token", data.token);
       navigate("/");
     } catch (err) {
